@@ -11,24 +11,26 @@
 // -------------------------------------------------------------
 
 export const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  databaseURL: 'YOUR_DATABASE_URL', // например https://YOUR_PROJECT_ID-default-rtdb.europe-west1.firebasedatabase.app
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.appspot.com',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId: 'YOUR_APP_ID'
+    apiKey: "AIzaSyC8AakMpxNFc3ceL7wmoizqrzq89ZEQKK0",
+    authDomain: "ayflow-app.firebaseapp.com",
+    projectId: "ayflow-app",
+    storageBucket: "ayflow-app.firebasestorage.app",
+    messagingSenderId: "83976051861",
+    appId: "1:83976051861:web:7c5528d37e7c72c4dfcf9c",
+    measurementId: "G-MGYVD4JYTS",
+    databaseURL: 'https://ayflow-app-default-rtdb.firebaseio.com/',
 };
 
 // Адрес вашего Cloudflare Worker для ИИ-меню (см. worker/README.md).
 // Пока здесь YOUR_WORKER_URL, кнопка ИИ сообщает, что он не подключён.
-export const aiEndpoint = 'YOUR_WORKER_URL';
+export const aiEndpoint = 'https://dash.cloudflare.com/94b087d8a8103c359583034764e7ed7d/home';
 
 export function isAiConfigured() {
-  return aiEndpoint.startsWith('https://');
+    return aiEndpoint.startsWith('https://');
 }
+
 
 // Настроен ли Firebase (заменены ли заглушки)
 export function isConfigured() {
-  return Object.values(firebaseConfig).every((v) => typeof v === 'string' && v && !v.includes('YOUR_'));
+    return Object.values(firebaseConfig).every((v) => typeof v === 'string' && v && !v.includes('YOUR_'));
 }
