@@ -1,0 +1,365 @@
+/* ---------- Переменные и база ---------- */
+:root {
+  --bg: #f4f6f8;
+  --card: #ffffff;
+  --text: #1f2933;
+  --muted: #7b8794;
+  --line: #e4e8ec;
+  --accent: #4f7cac;
+  --accent-soft: #e6eef6;
+  --ok: #5aa77c;
+  --warn: #e0a458;
+  --danger: #d46a6a;
+  --radius: 18px;
+  --nav-h: 62px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+body { padding-top: env(safe-area-inset-top, 0px); }
+body.no-scroll { overflow: hidden; }
+
+[hidden] { display: none !important; }
+
+h1, h2, h3, p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+#view {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px 16px calc(var(--nav-h) + var(--safe-b) + 28px);
+}
+
+.muted { color: var(--muted); }
+.small-text { font-size: 13px; }
+
+/* ---------- Заголовок страницы ---------- */
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 8px 0 16px;
+}
+.page-head h1 { font-size: 28px; letter-spacing: -0.02em; }
+.hello { margin: 8px 0 18px; }
+.hello .date { color: var(--muted); font-size: 14px; }
+.hello h1 { font-size: 28px; letter-spacing: -0.02em; margin-top: 2px; }
+
+/* ---------- Карточки ---------- */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(31, 41, 51, 0.04), 0 4px 14px rgba(31, 41, 51, 0.04);
+}
+.card.today { outline: 2px solid var(--accent-soft); }
+.card h2 { font-size: 17px; }
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.card-head small { color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 4px; }
+.card.note-card { background: var(--accent-soft); box-shadow: none; font-size: 14px; color: #3d5a78; }
+
+/* ---------- Строки списков ---------- */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+  min-height: 52px;
+}
+.row:first-of-type { border-top: 0; }
+.card-head + .row { border-top: 0; }
+.row[data-edit-event], .row[data-open], .row[data-edit],
+.row[data-edit-note], .row[data-edit-steps], .row[data-edit-week] { cursor: pointer; }
+.row-main { flex: 1; min-width: 0; }
+.row-title { font-weight: 500; overflow-wrap: anywhere; }
+.row-sub { color: var(--muted); font-size: 13px; margin-top: 1px; overflow-wrap: anywhere; }
+.row-time { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.row.past { opacity: 0.5; }
+.row.next .row-title { color: var(--accent); }
+.row-main.done .row-title { text-decoration: line-through; color: var(--muted); }
+.overdue { color: var(--danger); }
+
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; background: #9aa5b1; }
+.dot-school { background: #8b9bb4; }
+.dot-math { background: #4f7cac; }
+.dot-english { background: #9b7fc4; }
+.dot-gym { background: #d98c5f; }
+.dot-swim { background: #4fb0c6; }
+
+.empty { color: var(--muted); padding: 8px 0 4px; font-size: 15px; }
+
+/* ---------- Кнопки ---------- */
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 14px;
+  min-height: 48px;
+  padding: 0 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:active { transform: scale(0.98); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.danger { color: var(--danger); border-color: #f0d3d3; background: #fff; }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--accent); }
+.btn.small { min-height: 40px; padding: 0 14px; font-size: 15px; }
+.btn.block { display: block; width: 100%; margin-top: 10px; }
+
+.icon-btn {
+  appearance: none;
+  border: 0;
+  background: var(--accent-soft);
+  color: var(--accent);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  flex: none;
+}
+.icon-btn.quiet { background: transparent; color: var(--muted); font-size: 16px; }
+
+/* ---------- Формы ---------- */
+.field { display: block; margin-bottom: 14px; }
+.field > span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"],
+input[type="date"], input[type="time"], select, textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  font-size: 16px; /* 16px — чтобы iPhone не увеличивал страницу при вводе */
+  appearance: none;
+  -webkit-appearance: none;
+}
+textarea { resize: vertical; min-height: 120px; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
+
+.inline-form { display: flex; gap: 8px; margin-top: 10px; }
+.inline-form input { flex: 1; min-width: 0; }
+.inline-form .btn { flex: none; }
+
+/* Чекбокс */
+.check { display: inline-flex; flex: none; cursor: pointer; }
+.check input { position: absolute; opacity: 0; width: 0; height: 0; }
+.check span {
+  width: 26px; height: 26px;
+  border: 2px solid #c5ced6;
+  border-radius: 9px;
+  display: inline-block;
+  position: relative;
+  transition: background 0.15s, border-color 0.15s;
+}
+.check input:checked + span { background: var(--ok); border-color: var(--ok); }
+.check input:checked + span::after {
+  content: "";
+  position: absolute;
+  left: 7px; top: 3px;
+  width: 6px; height: 11px;
+  border: solid #fff;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+.check input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- Переключатели (сегменты) ---------- */
+.segmented {
+  display: flex;
+  background: #e9edf1;
+  padding: 3px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  gap: 2px;
+}
+.segmented button {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  min-height: 40px;
+  border-radius: 11px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.segmented button.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+
+/* ---------- Плитки на главной ---------- */
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.tile {
+  display: block;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 1px 2px rgba(31, 41, 51, 0.04), 0 4px 14px rgba(31, 41, 51, 0.04);
+}
+.tile .tile-label { color: var(--muted); font-size: 13px; }
+.tile .tile-value { font-size: 24px; font-weight: 700; margin-top: 2px; letter-spacing: -0.02em; }
+.tile .tile-sub { color: var(--muted); font-size: 13px; }
+
+/* ---------- Раздел «Ещё» ---------- */
+.menu-list a {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  text-decoration: none; color: inherit;
+  box-shadow: 0 1px 2px rgba(31, 41, 51, 0.04), 0 4px 14px rgba(31, 41, 51, 0.04);
+}
+.menu-list .emoji { font-size: 26px; width: 40px; text-align: center; }
+.menu-list b { display: block; font-size: 17px; }
+.menu-list span.sub { color: var(--muted); font-size: 13px; }
+
+/* ---------- Прогресс и столбики ---------- */
+.big-number { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; }
+.progress { height: 10px; background: #e9edf1; border-radius: 999px; overflow: hidden; margin: 10px 0 6px; }
+.progress i { display: block; height: 100%; background: var(--ok); border-radius: 999px; }
+
+.bars { display: flex; align-items: flex-end; gap: 8px; height: 120px; margin-top: 8px; }
+.bar { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; }
+.bar i { display: block; width: 100%; background: var(--accent); border-radius: 6px 6px 0 0; min-height: 3px; opacity: 0.85; }
+.bar.today i { opacity: 1; }
+.bar span { font-size: 11px; color: var(--muted); }
+
+/* ---------- Чипы подходов ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.chip {
+  border: 0;
+  background: var(--accent-soft);
+  color: #2f5174;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 38px;
+}
+.tag {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: #2f5174;
+  font-size: 12px;
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-weight: 600;
+}
+
+/* ---------- Навигация недели ---------- */
+.week-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
+.week-label { flex: 1; text-align: center; font-weight: 600; background: transparent; border: 0; min-height: 40px; cursor: pointer; }
+
+/* ---------- Нижняя навигация ---------- */
+.nav {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  height: calc(var(--nav-h) + var(--safe-b));
+  padding-bottom: var(--safe-b);
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+  z-index: 20;
+}
+.nav a {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+.nav svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nav a.active { color: var(--accent); }
+.nav a:last-child svg { fill: currentColor; stroke: none; }
+
+/* ---------- Нижний лист (формы) ---------- */
+.sheet-root { position: fixed; inset: 0; z-index: 40; display: none; }
+.sheet-root.open { display: block; }
+.backdrop { position: absolute; inset: 0; background: rgba(20, 28, 38, 0.4); animation: fade 0.2s ease; }
+.sheet {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  max-width: 640px;
+  margin: 0 auto;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 10px 20px calc(20px + var(--safe-b));
+  animation: slide 0.25s ease;
+}
+.sheet h2 { font-size: 20px; margin: 6px 0 16px; }
+.sheet-grip { width: 40px; height: 5px; border-radius: 3px; background: #d8dee4; margin: 0 auto 8px; }
+.sheet-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.sheet-actions .btn { width: 100%; }
+
+@keyframes slide { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--nav-h) + var(--safe-b) + 16px);
+  transform: translate(-50%, 20px);
+  background: #1f2933;
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 60;
+  max-width: 90vw;
+  text-align: center;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Экран входа ---------- */
+.auth-root { position: fixed; inset: 0; z-index: 50; background: var(--bg); display: none; overflow-y: auto; }
+.auth-root.open { display: block; }
+.auth-card { max-width: 420px; margin: 0 auto; padding: calc(48px + env(safe-area-inset-top, 0px)) 24px 32px; }
+.auth-card .logo { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; color: var(--accent); margin-bottom: 8px; }
+.auth-card form { margin-top: 22px; }
+.error { color: var(--danger); font-size: 14px; margin-bottom: 8px; }
+
+/* ---------- Статусы ---------- */
+.status-line { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 15px; }
+.status-line:first-of-type { border-top: 0; }
+.status-line span:last-child { color: var(--muted); text-align: right; }
+
+@media (min-width: 700px) {
+  #view { padding-top: 28px; }
+}
+@media (max-width: 360px) {
+  .page-head h1, .hello h1 { font-size: 24px; }
+  .big-number { font-size: 34px; }
+}
